@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './custom.less';
+import { Button } from 'rsuite';
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
         >
           Learn React
         </a>
+        <Button>Test</Button>
       </header>
     </div>
   );
