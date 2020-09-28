@@ -9,8 +9,11 @@ import { rootReducer } from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import './i18n';
 import Loading from './components/Loading';
+import promise from 'redux-promise-middleware';
+import { loadingBarMiddleware } from 'react-redux-loading-bar'
+import logger from 'redux-logger';
 
-const middleware = applyMiddleware(thunkMiddleware);
+const middleware = applyMiddleware(thunkMiddleware, promise, loadingBarMiddleware(), logger);
 const store = createStore(rootReducer, middleware);
 
 ReactDOM.render(
