@@ -5,15 +5,16 @@ import * as serviceWorker from './serviceWorker';
 import { Routes } from './Routes';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { rootReducer } from './reducers';
+import { history, rootReducer } from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import './i18n';
 import Loading from './components/Loading';
 import promise from 'redux-promise-middleware';
 import { loadingBarMiddleware } from 'react-redux-loading-bar'
 import logger from 'redux-logger';
+import { routerMiddleware } from 'connected-react-router';
 
-const middleware = applyMiddleware(thunkMiddleware, promise, loadingBarMiddleware(), logger);
+const middleware = applyMiddleware(routerMiddleware(history), thunkMiddleware, promise, loadingBarMiddleware(), logger);
 const store = createStore(rootReducer, middleware);
 
 ReactDOM.render(

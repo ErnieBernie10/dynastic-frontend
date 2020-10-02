@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Navbar, Nav } from "rsuite";
-import { LoadingBar } from "react-redux-loading-bar";
+import LoadingBar from "react-redux-loading-bar";
 
 export const Header: FC = () => {
   return (
