@@ -4,12 +4,14 @@ import { Person } from "../models/Person";
 
 interface Props {
   person: Person;
+  className?: string;
+  style?: object;
 }
 
-export const PersonNode: React.FC<Props> = ({ person }: Props) => {
+export const PersonNode: React.FC<Props> = ({ person, className, style }: Props) => {
   return (
-    <div style={{ margin: 50}}>
-      <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 240 }}>
+    <div>
+      <Panel shaded bordered bodyFill className={className} style={{ ...style, display: 'inline-block', width: 240 }}>
         <img src="https://via.placeholder.com/240x240" height="240" />
         <Panel header={person.name}>
         </Panel>
