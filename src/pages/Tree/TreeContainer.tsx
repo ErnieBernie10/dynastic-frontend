@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Person } from "../../models/Person";
 import RelationshipNode from "../../components/RelationshipNode";
 
@@ -7,6 +7,7 @@ import {
   TransformWrapper
 } from "react-zoom-pan-pinch";
 import { useDynasty } from "../../api/dynasty";
+import { SteppedLineTo } from "react-lineto";
 
 interface Props {
 
@@ -14,20 +15,30 @@ interface Props {
 
 const TreeContainer: React.FC<Props> = () => {
 
-  const [tree, setTree] = useState<Person[]>([]);
   const { status, data, error, isFetching } = useDynasty("5fc76ba2aa60f95ff0c0af06");
-  
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (!ready) {
+      setTimeout(() => {
+        setReady(true);
+      }, 1);
+      setTimeout(() => {
+        setReady(false);
+      }, 1);
+    }
+  }, [isFetching]);
+
   if (data) {
     return (
       <TransformWrapper options={{
         limitToBounds: false
       }}>
-          <TransformComponent>
-            <div style={{ width: "100vw", height: "100vh"}}>
-              <RelationshipNode person={data.members[0] as Person} partner={data.members[1] as Person} people={data.members} />
-            </div>
-          </TransformComponent>
-          {/*<SteppedLineTo borderColor={"red"} within={"tree-container"} from={"node-6"} to={"node-3"} orientation={"v"} fromAnchor={"bottom"} toAnchor={"top"} />*/}
+        <TransformComponent>
+          <div style={{ width: "100vw", height: "100vh"}} className={"tree-container"}>
+            <RelationshipNode person={data.members[0] as Person} partner={data.members[1] as Person} people={data.members} />
+          </div>
+        </TransformComponent>
       </TransformWrapper>
     );
   }

@@ -8,6 +8,8 @@ interface Props {
 
 export const SingleNode: React.FC<Props> = ({ person }: Props) => {
   return (
-    <PersonNode person={person} style={{ margin: 50, display: "block" }} />
+    <div style={{ margin: 50, display: "block" }} className={"node-" + person._id}>
+      <PersonNode person={person} />
+    </div>
   );
 }

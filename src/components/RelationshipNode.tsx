@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { SteppedLineTo } from "react-lineto";
 import { Person } from "../models/Person";
 import { getChildrenFromCouple, getRelationship } from "../utils/treeUtils";
 import { PersonNode } from "./PersonNode";
@@ -18,11 +19,11 @@ const RelationshipNode: React.FC<Props> = ({ person, partner, people }: Props) =
       return getRelationship(p, people);
     });
   }, [person])
-
+  
   return (
     <div>
-      <div style={{ margin: 50 }} className={"node-" + person._id}>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ margin: 50 }}>
+        <div style={{ display: "flex", justifyContent: "center" }} className={"node-" + person._id}>
           <PersonNode person={person} />
           <PersonNode person={partner} />
         </div>
@@ -33,11 +34,17 @@ const RelationshipNode: React.FC<Props> = ({ person, partner, people }: Props) =
               const partner = r.partner;
               if (partner) {
                 return (
-                  <RelationshipNode person={child} partner={partner} people={people} />
+                  <>
+                    <RelationshipNode person={child} partner={partner} people={people} />
+                    <SteppedLineTo borderColor={"white"} within={"tree-container"} from={"node-" + person._id} to={"node-" + child._id} orientation={"v"} fromAnchor={"bottom"} toAnchor={"top"} />
+                  </>
                 );
               } else {
                 return (
-                  <SingleNode person={child} />
+                  <>
+                    <SingleNode person={child} />
+                    <SteppedLineTo borderColor={"white"} within={"tree-container"} from={"node-" + person._id} to={"node-" + child._id} orientation={"v"} fromAnchor={"bottom"} toAnchor={"top"} />
+                  </>
                 );
               }
             })
