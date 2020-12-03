@@ -1,9 +1,11 @@
 export interface Person {
-  id: number;
-  name: string;
-  mother?: number;
-  father?: number;
-  relationship?: number;
+  _id: string;
+  firstname: string;
+  lastname: string;
+  middlename?: string;
+  mother?: string;
+  father?: string;
+  relationships?: string[];
 }
 
 export interface Relationship {

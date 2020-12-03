@@ -13,16 +13,20 @@ import promise from 'redux-promise-middleware';
 import { loadingBarMiddleware } from 'react-redux-loading-bar'
 import logger from 'redux-logger';
 import { routerMiddleware } from 'connected-react-router';
+import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 
 const middleware = applyMiddleware(routerMiddleware(history), thunkMiddleware, promise, loadingBarMiddleware(), logger);
 const store = createStore(rootReducer, middleware);
+const queryCache = new QueryCache();
 
 ReactDOM.render(
   <React.StrictMode>
     <Suspense fallback={<Loading/>}>
-    <Provider store={store}>
-      <Routes/>
-    </Provider>
+      <ReactQueryCacheProvider queryCache={queryCache}>
+        <Provider store={store}>
+          <Routes/>
+        </Provider>
+      </ReactQueryCacheProvider>
     </Suspense>
   </React.StrictMode>,
   document.getElementById('root')
