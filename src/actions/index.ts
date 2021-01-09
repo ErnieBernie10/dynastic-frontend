@@ -3,7 +3,6 @@ import { ThunkAction } from "redux-thunk";
 import { RootState } from "../reducers";
 import { Action } from "redux";
 
-export * from "./auth";
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,

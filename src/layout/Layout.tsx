@@ -1,19 +1,17 @@
-import React, { FC } from 'react';
-import { Container, Content } from 'rsuite';
-import { Header } from './Header';
+import { Container } from "@chakra-ui/react";
+import React, { FC } from "react";
+import NavBar from "./NavBar";
 
-type Props = { 
-  children: React.ReactNode,
-  fullPage?: boolean 
-};
-
-export const Layout: FC<Props> = ({ children, fullPage }) => {
-  return (
-    <Container>
-      <Header />
-      <Content>
-        { children }
-      </Content>
-    </Container>
-    );
+interface Props {
+  children: React.ReactNode;
 }
+
+export const Layout: FC<Props> = ({ children }) => {
+  return (
+    <div>
+      <NavBar />
+
+      <Container as="main" minW="80%">{children}</Container>
+    </div>
+  );
+};

@@ -1,6 +1,6 @@
 import React from "react";
-import { Panel } from "rsuite";
 import { Person } from "../models/Person";
+import { Box, Image } from "@chakra-ui/react";
 
 interface Props {
   person: Person;
@@ -11,11 +11,11 @@ interface Props {
 export const PersonNode: React.FC<Props> = ({ person, className, style }: Props) => {
   return (
     <div>
-      <Panel shaded bordered bodyFill className={className} style={{ ...style, display: 'inline-block', width: 240 }}>
-        <img src="https://via.placeholder.com/240x240" height="240" />
-        <Panel header={`${person.firstname}${person.middlename ? person.middlename + " " : " "}${person.lastname}`}>
-        </Panel>
-      </Panel>
+      <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" className={className}>
+        <Image src="https://via.placeholder.com/240x240" height="240" />
+        <Box header={`${person.firstname}${person.middlename ? person.middlename + " " : " "}${person.lastname}`}>
+        </Box>
+      </Box>
     </div>
   );
 }

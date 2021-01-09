@@ -18,7 +18,7 @@ const RelationshipNode: React.FC<Props> = ({ person, partner, people }: Props) =
     return getChildrenFromCouple({ person, partner }, people).map(p => {
       return getRelationship(p, people);
     });
-  }, [person])
+  }, [partner, people, person])
   
   return (
     <div>

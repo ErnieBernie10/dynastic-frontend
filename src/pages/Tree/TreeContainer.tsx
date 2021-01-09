@@ -7,7 +7,6 @@ import {
   TransformWrapper
 } from "react-zoom-pan-pinch";
 import { useDynasty } from "../../api/dynasty";
-import { SteppedLineTo } from "react-lineto";
 
 interface Props {
 
@@ -27,7 +26,7 @@ const TreeContainer: React.FC<Props> = () => {
         setReady(false);
       }, 1);
     }
-  }, [isFetching]);
+  }, [isFetching, ready]);
 
   if (data) {
     return (
