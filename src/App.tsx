@@ -1,6 +1,6 @@
-import React from 'react';
-import './App.css';
-import { Layout } from './layout/Layout';
+import React from "react";
+import "./App.css";
+import { Layout } from "./layout/Layout";
 
 function App() {
   return (

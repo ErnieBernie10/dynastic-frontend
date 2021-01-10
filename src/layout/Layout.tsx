@@ -11,7 +11,9 @@ export const Layout: FC<Props> = ({ children }) => {
     <div>
       <NavBar />
 
-      <Container as="main" minW="80%">{children}</Container>
+      <Container as="main" minW="80%">
+        {children}
+      </Container>
     </div>
   );
 };

@@ -4,9 +4,9 @@ const theme = extendTheme({
   colors: {
     dynasty: {
       lightBg: "",
-      darkBg: ""
-    }
-  }
+      darkBg: "",
+    },
+  },
 });
 
 export default theme;

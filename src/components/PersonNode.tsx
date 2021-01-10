@@ -8,14 +8,27 @@ interface Props {
   style?: object;
 }
 
-export const PersonNode: React.FC<Props> = ({ person, className, style }: Props) => {
+export const PersonNode: React.FC<Props> = ({
+  person,
+  className,
+  style,
+}: Props) => {
   return (
     <div>
-      <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" className={className}>
+      <Box
+        maxW="sm"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        className={className}
+      >
         <Image src="https://via.placeholder.com/240x240" height="240" />
-        <Box header={`${person.firstname}${person.middlename ? person.middlename + " " : " "}${person.lastname}`}>
-        </Box>
+        <Box
+          header={`${person.firstname}${
+            person.middlename ? person.middlename + " " : " "
+          }${person.lastname}`}
+        ></Box>
       </Box>
     </div>
   );
-}
+};

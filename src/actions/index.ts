@@ -1,4 +1,3 @@
-
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../reducers";
 import { Action } from "redux";
@@ -14,7 +13,6 @@ export type AppAction<T = any> = {
   payload: T;
 };
 export type AsyncAction<T> = {
-  type: string,
-  payload: Promise<T>
-}
-
+  type: string;
+  payload: Promise<T>;
+};

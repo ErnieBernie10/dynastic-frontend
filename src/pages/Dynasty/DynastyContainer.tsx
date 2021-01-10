@@ -10,6 +10,7 @@ import {
 import { AddIcon } from "@chakra-ui/icons";
 import React from "react";
 import { Layout } from "../../layout/Layout";
+import { Link } from "react-router-dom";
 
 const DynastyContainer = () => {
   return (
@@ -54,6 +55,8 @@ const DynastyContainer = () => {
             aria-label="Add member"
             rightIcon={<AddIcon />}
             float="right"
+            as={Link}
+            to="/dynasty/members/create"
           >
             Add Member
           </Button>
