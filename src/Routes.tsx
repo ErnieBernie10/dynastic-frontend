@@ -1,25 +1,23 @@
-import { ConnectedRouter } from "connected-react-router";
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import App from "./App";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CreateMemberContainer from "./pages/Dynasty/CreateMemberContainer";
 import DynastyContainer from "./pages/Dynasty/DynastyContainer";
+import Home from "./pages/Home/Home";
 import TreeContainer from "./pages/Tree/TreeContainer";
-import { history } from "./reducers";
 
 export const Routes = () => {
   return (
-    <ConnectedRouter history={history}>
+    <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={App} />
+        <Route exact path="/" component={Home} />
         <Route exact path="/tree" component={TreeContainer} />
-        <Route exact path="/dynasty" component={DynastyContainer} />
+        <Route exact path="/dynasty/:id" component={DynastyContainer} />
         <Route
           exact
-          path="/dynasty/members/create"
+          path="/dynasty/:id/create"
           component={CreateMemberContainer}
         />
       </Switch>
-    </ConnectedRouter>
+    </BrowserRouter>
   );
 };

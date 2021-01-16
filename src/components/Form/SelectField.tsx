@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Input, Select } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import { useSelect } from "react-select-search";

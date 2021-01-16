@@ -20,6 +20,8 @@
   },
   "rules": {
     "react/prop-types": ["off"],
-    "max-lines-per-function": ["error", 40]
+    "@typescript-eslint/explicit-module-boundary-types": ["off"],
+    "react/display-name": ["off"],
+    "max-lines-per-function": ["off"]
   }
 }
