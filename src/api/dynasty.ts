@@ -4,13 +4,13 @@ import { baseUrl } from "../config";
 import Dynasty from "../models/api/Dynasty";
 import { Person } from "../models/Person";
 
-const getDynastyById = async (key: string, id: string) =>
+const getDynastyById = async (id: string) =>
   await axiosApi
     .get<Dynasty>(baseUrl + "/dynasties/" + id)
     .then((response) => response.data);
 
 export const useDynasty = (id: string) =>
-  useQuery<Dynasty>(["dynasty", id], getDynastyById);
+  useQuery(["dynasty", id], () => getDynastyById(id));
 
 interface CreateMemberParams {
   id: string;

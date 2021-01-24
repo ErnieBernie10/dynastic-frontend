@@ -1,16 +1,15 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useDynasty } from "../../api/dynasty";
+import { useDynasty } from "../../../api/dynasty";
 import DynastyDashboard from "./DynastyDashboard";
 
 const DynastyContainer = () => {
   const { id } = useParams<{ id: string }>();
-  const { isLoading, data } = useDynasty(id);
-  if (data && !isLoading) {
+  const { data } = useDynasty(id);
+  if (data) {
     return <DynastyDashboard dynasty={data} id={id} />;
-  } else {
-    return <div>Loading...</div>;
   }
+  return <div>Problem loading page</div>;
 };
 
 export default DynastyContainer;

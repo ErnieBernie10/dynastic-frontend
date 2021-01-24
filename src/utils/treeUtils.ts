@@ -1,4 +1,4 @@
-import { Person, Relationship } from "../models/Person";
+import { Person, Relationship } from "../models/api/Person";
 
 export const getChildrenFromPerson = (person: Person, people: Person[]) =>
   people.filter((p) => p.mother === person._id || p.father === person._id);

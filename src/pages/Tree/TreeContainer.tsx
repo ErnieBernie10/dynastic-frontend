@@ -3,11 +3,13 @@ import { Person } from "../../models/Person";
 import RelationshipNode from "../../components/RelationshipNode";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import { useDynasty } from "../../api/dynasty";
+import { useParams } from "react-router-dom";
 
 interface Props {}
 
 const TreeContainer: React.FC<Props> = () => {
-  const { data, isFetching } = useDynasty("5fc76ba2aa60f95ff0c0af06");
+  const { id } = useParams<{ id: string }>();
+  const { data, isFetching } = useDynasty(id);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {

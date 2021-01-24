@@ -8,9 +8,8 @@ export interface InputProps {
 }
 
 export interface InputFieldProps {
-  inputRef: any;
-  name: string;
-  placeholder: string;
+  inputRef?: any;
+  placeholder?: string;
 }
 
 const withValidation = <T extends InputFieldProps>(

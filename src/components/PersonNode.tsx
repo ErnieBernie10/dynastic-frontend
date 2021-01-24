@@ -1,5 +1,5 @@
 import React from "react";
-import { Person } from "../models/Person";
+import { Person } from "../models/api/Person";
 import { Box, Image } from "@chakra-ui/react";
 
 interface Props {
@@ -13,6 +13,9 @@ export const PersonNode: React.FC<Props> = ({
   className,
   style,
 }: Props) => {
+  const fullName = `${person.firstname}${
+    person.middlename ? person.middlename + " " : " "
+  }${person.lastname}`;
   return (
     <div>
       <Box
@@ -23,11 +26,9 @@ export const PersonNode: React.FC<Props> = ({
         className={className}
       >
         <Image src="https://via.placeholder.com/240x240" height="240" />
-        <Box
-          header={`${person.firstname}${
-            person.middlename ? person.middlename + " " : " "
-          }${person.lastname}`}
-        ></Box>
+        <Box header={fullName} padding={2}>
+          {fullName}
+        </Box>
       </Box>
     </div>
   );

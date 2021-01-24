@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { SteppedLineTo } from "react-lineto";
-import { Person } from "../models/Person";
+import { Person } from "../models/api/Person";
 import { getChildrenFromCouple, getRelationship } from "../utils/treeUtils";
 import { PersonNode } from "./PersonNode";
 import { SingleNode } from "./SingleNode";
@@ -30,7 +30,10 @@ const RelationshipNode: React.FC<Props> = ({
           style={{ display: "flex", justifyContent: "center" }}
           className={"node-" + person._id}
         >
-          <PersonNode person={person} />
+          <PersonNode
+            className={"node-" + person._id + "-" + partner._id}
+            person={person}
+          />
           <PersonNode person={partner} />
         </div>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
@@ -49,7 +52,7 @@ const RelationshipNode: React.FC<Props> = ({
                     borderColor={"white"}
                     within={"tree-container"}
                     from={"node-" + person._id}
-                    to={"node-" + child._id}
+                    to={"node-" + child._id + "-" + partner._id}
                     orientation={"v"}
                     fromAnchor={"bottom"}
                     toAnchor={"top"}
