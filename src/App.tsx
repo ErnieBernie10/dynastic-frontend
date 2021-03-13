@@ -1,3 +1,4 @@
+import { Auth0Provider } from "@auth0/auth0-react";
 import { ChakraProvider, theme } from "@chakra-ui/react";
 import React, { Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -26,13 +27,19 @@ export const UserContext = React.createContext<UserContext>(defaultUserContext);
 function App() {
   return (
     <UserContext.Provider value={defaultUserContext}>
-      <Suspense fallback={<Loading />}>
-        <QueryClientProvider client={queryClient}>
-          <ChakraProvider theme={theme}>
-            <Routes />
-          </ChakraProvider>
-        </QueryClientProvider>
-      </Suspense>
+      <Auth0Provider
+        clientId={process.env.REACT_APP_AUTH0_CLIENT_ID ?? ""}
+        domain={process.env.REACT_APP_AUTH0_DOMAIN ?? ""}
+        redirectUri={window.location.origin}
+      >
+        <Suspense fallback={<Loading />}>
+          <QueryClientProvider client={queryClient}>
+            <ChakraProvider theme={theme}>
+              <Routes />
+            </ChakraProvider>
+          </QueryClientProvider>
+        </Suspense>
+      </Auth0Provider>
     </UserContext.Provider>
   );
 }

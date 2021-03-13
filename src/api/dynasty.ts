@@ -22,6 +22,14 @@ const createMember = async ({ id, person }: CreateMemberParams) =>
     .then((response) => response);
 
 export const useCreateMember = () =>
-  useMutation<string, unknown, CreateMemberParams>((params) =>
-    createMember(params)
-  );
+  useMutation<string, unknown, CreateMemberParams>(createMember);
+
+interface CreateDynastyParams {
+  name: string;
+}
+const createDynasty = async (body: CreateDynastyParams) =>
+  await axiosApi
+    .post<CreateDynastyParams, Dynasty>(baseUrl + "/dynasties", { ...body }, { headers: { "Authorization":  } })
+    .then((response) => response);
+export const useCreateDynasty = () =>
+  useMutation<Dynasty, unknown, CreateDynastyParams>(createDynasty);

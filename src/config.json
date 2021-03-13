@@ -1,7 +1,7 @@
 {
   "fetchUrl": {
     "production": "",
-    "development": "http://localhost:5000",
+    "development": "https://localhost:5001/api",
     "test": ""
   }
 }

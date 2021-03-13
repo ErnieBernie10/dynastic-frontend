@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Person } from "../../models/Person";
-import RelationshipNode from "../../components/RelationshipNode";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import { useDynasty } from "../../api/dynasty";
 import { useParams } from "react-router-dom";
@@ -35,11 +34,11 @@ const TreeContainer: React.FC<Props> = () => {
             style={{ width: "100vw", height: "100vh" }}
             className={"tree-container"}
           >
-            <RelationshipNode
+            {/* <RelationshipNode
               person={data.members[0] as Person}
               partner={data.members[1] as Person}
               people={data.members}
-            />
+            /> */}
           </div>
         </TransformComponent>
       </TransformWrapper>

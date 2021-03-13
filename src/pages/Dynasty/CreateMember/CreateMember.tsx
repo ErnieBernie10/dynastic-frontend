@@ -1,6 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
-import { Layout } from "../../../layout/Layout";
 import Dynasty from "../../../models/api/Dynasty";
 import { Person } from "../../../models/Person";
 import CreateMemberForm from "./CreateMemberForm";
