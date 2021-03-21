@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Person } from "../../models/Person";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
-import { useDynasty } from "../../api/dynasty";
+import { useDynastyTree } from "../../api/dynasty";
 import { useParams } from "react-router-dom";
+import { Button } from "@chakra-ui/button";
+import { AddIcon } from "@chakra-ui/icons";
+import CreateMemberContainer from "../Dynasty/CreateMember/CreateMemberContainer";
+import { useDisclosure } from "@chakra-ui/react";
+import { Layout } from "../../layout/Layout";
 
 interface Props {}
 
 const TreeContainer: React.FC<Props> = () => {
   const { id } = useParams<{ id: string }>();
-  const { data, isFetching } = useDynasty(id);
+  const { data, isFetching } = useDynastyTree(id);
   const [ready, setReady] = useState(false);
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   useEffect(() => {
     if (!ready) {
@@ -22,8 +27,18 @@ const TreeContainer: React.FC<Props> = () => {
     }
   }, [isFetching, ready]);
 
-  if (data) {
-    return (
+  return (
+    <Layout>
+      <CreateMemberContainer
+        type="child"
+        onOpen={onOpen}
+        onClose={onClose}
+        isOpen={isOpen}
+        dynasty={data}
+      />
+      <Button colorScheme="green" leftIcon={<AddIcon />} onClick={onOpen}>
+        Add Member
+      </Button>
       <TransformWrapper
         options={{
           limitToBounds: false,
@@ -42,9 +57,8 @@ const TreeContainer: React.FC<Props> = () => {
           </div>
         </TransformComponent>
       </TransformWrapper>
-    );
-  }
-  return <div>No data</div>;
+    </Layout>
+  );
 };
 
 export default TreeContainer;

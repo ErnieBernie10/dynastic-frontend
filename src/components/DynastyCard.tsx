@@ -8,14 +8,9 @@ import {
   Image,
   Text,
   useDisclosure,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
 } from "@chakra-ui/react";
 import Dynasty from "../models/api/Dynasty";
 import { Link } from "react-router-dom";
-import CreateMemberContainer from "../pages/Dynasty/CreateMember/CreateMemberContainer";
 
 interface DynastyCardProps {
   dynasty: Dynasty;
@@ -23,7 +18,7 @@ interface DynastyCardProps {
 }
 
 const DynastyCard: React.FC<DynastyCardProps> = ({ dynasty, id }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpen } = useDisclosure();
 
   return (
     <div>
@@ -81,14 +76,6 @@ const DynastyCard: React.FC<DynastyCardProps> = ({ dynasty, id }) => {
           View Tree
         </Button>
       </Box>
-      <Drawer onClose={onClose} isOpen={isOpen} size="lg">
-        <DrawerOverlay>
-          <DrawerContent padding={8}>
-            <DrawerCloseButton />
-            <CreateMemberContainer type="child" />
-          </DrawerContent>
-        </DrawerOverlay>
-      </Drawer>
     </div>
   );
 };

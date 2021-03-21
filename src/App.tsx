@@ -30,6 +30,7 @@ function App() {
       <Auth0Provider
         clientId={process.env.REACT_APP_AUTH0_CLIENT_ID ?? ""}
         domain={process.env.REACT_APP_AUTH0_DOMAIN ?? ""}
+        audience={process.env.REACT_APP_AUTH0_AUDIENCE ?? ""}
         redirectUri={window.location.origin}
       >
         <Suspense fallback={<Loading />}>

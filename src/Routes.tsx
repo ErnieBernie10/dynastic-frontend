@@ -7,41 +7,27 @@ import {
   RouteProps,
   Switch,
 } from "react-router-dom";
-import CreateMemberContainer from "./pages/Dynasty/CreateMember/CreateMemberContainer";
-import DynastyContainer from "./pages/Dynasty/DynastyDashboard/DynastyContainer";
+import DynastyContainer from "./pages/Dynasty/Dynasty/DynastyContainer";
 import Home from "./pages/Home/Home";
 import LoginContainer from "./pages/Login/LoginContainer";
 import TreeContainer from "./pages/Tree/TreeContainer";
-import CreateDynastyContainer from "./pages/Dynasty/CreateDynasty/CreateDynastyContainer";
+import ListDynastiesContainer from "./pages/Dynasty/ListDynasties/ListDynastiesContainer";
 
 export const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route
-          exact
-          path="/dynasty/create"
-          component={CreateDynastyContainer}
-        />
+        <Route exact path="/dynasties" component={ListDynastiesContainer} />
         <Route exact path="/login" component={LoginContainer} />
         <Route exact path="/dynasty/:id/tree" component={TreeContainer} />
         <Route exact path="/dynasty/:id" component={DynastyContainer} />
-        <Route
-          exact
-          path="/dynasty/:id/create/child"
-          component={() => <CreateMemberContainer type="child" />}
-        />
-        <Route
-          exact
-          path="dynasty/:id/create/relationship"
-          component={() => <CreateMemberContainer type="relationship" />}
-        />
       </Switch>
     </BrowserRouter>
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ProtectedRoute: React.FC<RouteProps> = ({
   component: Component,
   ...rest

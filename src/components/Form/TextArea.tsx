@@ -1,20 +1,20 @@
-import { Input, InputProps } from "@chakra-ui/react";
+import { Textarea, TextareaProps } from "@chakra-ui/react";
 import React from "react";
 
-interface InputFieldProps extends InputProps {
+interface TextareaFieldProps extends TextareaProps {
   name: string;
   placeholder: string;
   inputRef: any;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
+const TextareaField: React.FC<TextareaFieldProps> = ({
   name,
   placeholder,
   inputRef,
   ...rest
 }) => {
   return (
-    <Input
+    <Textarea
       type="text"
       name={name}
       placeholder={placeholder}
@@ -24,4 +24,4 @@ const InputField: React.FC<InputFieldProps> = ({
   );
 };
 
-export default InputField;
+export default TextareaField;

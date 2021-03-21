@@ -1,11 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useDynasty } from "../../../api/dynasty";
+import { useDynastyTree } from "../../../api/dynasty";
 import DynastyDashboard from "./DynastyDashboard";
 
 const DynastyContainer = () => {
   const { id } = useParams<{ id: string }>();
-  const { data } = useDynasty(id);
+  const { data } = useDynastyTree(id);
   if (data) {
     return <DynastyDashboard dynasty={data} id={id} />;
   }

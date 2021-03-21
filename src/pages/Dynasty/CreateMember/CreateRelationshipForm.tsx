@@ -3,10 +3,10 @@ import React from "react";
 import InputField from "../../../components/Form/InputField";
 import SelectField from "../../../components/Form/SelectField";
 import withValidation from "../../../components/Form/WithValidation";
-import { CreateMemberProps } from "./CreateMember";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { CreateMemberProps } from "./CreateMemberForm";
 
 const Input = withValidation(InputField);
 const Select = withValidation(SelectField);
@@ -47,17 +47,19 @@ const CreateRelationshipForm: React.FC<CreateMemberProps> = ({
           placeholder="Lastname"
         />
       </HStack>
-      <Select
-        options={dynasty.members.map((p) => ({
-          name: p.firstname + " " + p.lastname,
-          value: p._id,
-        }))}
-        error={errors.partner}
-        inputRef={register}
-        name="partner"
-        placeholder="Partner"
-        label="Partner"
-      />
+      {dynasty && (
+        <Select
+          options={dynasty.members.map((p) => ({
+            name: p.firstname + " " + p.lastname,
+            value: p._id,
+          }))}
+          error={errors.partner}
+          inputRef={register}
+          name="partner"
+          placeholder="Partner"
+          label="Partner"
+        />
+      )}
     </form>
   );
 };
