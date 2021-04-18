@@ -25,7 +25,7 @@ const DynastyDashboard: React.FC<DynastyProps> = ({ dynasty, id }) => {
             </Thead>
             <Tbody>
               {dynasty.members.map((m) => (
-                <Tr key={m._id}>
+                <Tr key={m.id}>
                   <Td>{m.firstname + " " + m.lastname}</Td>
                   <Td>TODO</Td>
                   <Td>TODO</Td>

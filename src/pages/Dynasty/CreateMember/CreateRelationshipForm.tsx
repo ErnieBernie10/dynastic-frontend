@@ -51,7 +51,7 @@ const CreateRelationshipForm: React.FC<CreateMemberProps> = ({
         <Select
           options={dynasty.members.map((p) => ({
             name: p.firstname + " " + p.lastname,
-            value: p._id,
+            value: p.id,
           }))}
           error={errors.partner}
           inputRef={register}

@@ -4,11 +4,13 @@ import { useCreateMember } from "../../../api/dynasty";
 import { DisclosureProps } from "../../../interface/DisclosureProps";
 import Dynasty from "../../../models/api/Dynasty";
 import { Person } from "../../../models/Person";
+import { Tree } from "../../../models/Tree";
 import CreateMemberForm from "./CreateMemberForm";
 
 interface CreateMemberContainerProps extends DisclosureProps {
   type: "child" | "relationship";
   dynasty?: Dynasty;
+  tree?: Tree;
 }
 
 const CreateMemberContainer: React.FC<CreateMemberContainerProps> = ({
@@ -17,6 +19,7 @@ const CreateMemberContainer: React.FC<CreateMemberContainerProps> = ({
   onClose,
   isOpen,
   dynasty,
+  tree,
 }) => {
   const { id } = useParams<{ id: string }>();
   const { mutate } = useCreateMember();
@@ -33,6 +36,7 @@ const CreateMemberContainer: React.FC<CreateMemberContainerProps> = ({
         isOpen={isOpen}
         onClose={onClose}
         onOpen={onOpen}
+        tree={tree}
       />
     );
   } else {

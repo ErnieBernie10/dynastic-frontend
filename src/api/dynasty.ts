@@ -4,6 +4,7 @@ import axiosApi from "../axios-config";
 import { baseUrl } from "../config";
 import Dynasty from "../models/api/Dynasty";
 import { Person } from "../models/Person";
+import { Tree } from "../models/Tree";
 import { GetAccessTokenSilently } from "./interface/auth";
 
 const getDynastyTreeById = async (
@@ -13,14 +14,14 @@ const getDynastyTreeById = async (
   const token = await getToken();
 
   return await axiosApi
-    .get<Dynasty>(baseUrl + "/dynasties/" + id + "/tree", {
+    .get<Tree>(baseUrl + "/dynasties/" + id + "/tree", {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => response.data);
 };
 export const useDynastyTree = (id: string) => {
   const { getAccessTokenSilently } = useAuth0();
-  return useQuery(["dynasty", id], () =>
+  return useQuery(["dynastyTree", id], () =>
     getDynastyTreeById(id, getAccessTokenSilently)
   );
 };
@@ -29,14 +30,32 @@ interface CreateMemberParams {
   id: string;
   person: Person;
 }
-const createMember = async ({ id, person }: CreateMemberParams) => {
+const createMember = async (
+  { id, person }: CreateMemberParams,
+  getToken: GetAccessTokenSilently
+) => {
+  const token = await getToken();
   return await axiosApi
-    .post<Person, string>(baseUrl + "/dynasties/" + id, { ...person })
+    .post<Person, string>(
+      baseUrl + "/dynasties/" + id + "/members",
+      {
+        ...person,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    )
     .then((response) => response);
 };
 
-export const useCreateMember = () =>
-  useMutation<string, unknown, CreateMemberParams>(createMember);
+export const useCreateMember = () => {
+  const { getAccessTokenSilently } = useAuth0();
+  return useMutation<string, unknown, CreateMemberParams>((params) =>
+    createMember(params, getAccessTokenSilently)
+  );
+};
 
 interface CreateDynastyParams {
   name: string;
@@ -75,4 +94,21 @@ export const useDynasties = () => {
   const { getAccessTokenSilently } = useAuth0();
 
   return useQuery("dynasties", () => getDynasties(getAccessTokenSilently));
+};
+
+const getDynastyById = async (id: string, getToken: GetAccessTokenSilently) => {
+  const token = await getToken();
+  return await axiosApi
+    .get<Dynasty>(baseUrl + "/dynasties/" + id, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+    .then((response) => response.data);
+};
+export const useDynasty = (id: string) => {
+  const { getAccessTokenSilently } = useAuth0();
+  return useQuery(["dynasty", id], () =>
+    getDynastyById(id, getAccessTokenSilently)
+  );
 };
