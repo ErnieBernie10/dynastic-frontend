@@ -18,6 +18,7 @@ export interface CreateMemberProps extends DisclosureProps {
   dynasty?: Dynasty;
   tree?: Tree;
   createMember: (formData: Person) => void;
+  isLoading: boolean;
 }
 
 const Input = withValidation(InputField);
@@ -38,6 +39,7 @@ const CreateMemberForm: React.FC<CreateMemberProps> = ({
   onOpen,
   isOpen,
   tree,
+  isLoading,
 }) => {
   const { register, handleSubmit, formState } = useForm<CreateMemberForm>({
     mode: "onBlur",
@@ -51,6 +53,7 @@ const CreateMemberForm: React.FC<CreateMemberProps> = ({
       onOpen={onOpen}
       onClose={onClose}
       onSubmit={handleSubmit(createMember)}
+      isLoading={isLoading}
       header="Add Member"
       size="md"
     >

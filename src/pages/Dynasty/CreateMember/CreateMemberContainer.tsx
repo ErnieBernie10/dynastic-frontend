@@ -22,15 +22,19 @@ const CreateMemberContainer: React.FC<CreateMemberContainerProps> = ({
   tree,
 }) => {
   const { id } = useParams<{ id: string }>();
-  const { mutate } = useCreateMember();
+  const { mutateAsync, isLoading } = useCreateMember();
 
-  const handleSubmit = (formData: Person) => {
-    mutate({ id, person: formData });
+  const handleSubmit = async (formData: Person) => {
+    const result = await mutateAsync({ id, person: formData });
+    if (result) {
+      onClose();
+    }
   };
 
   if (type === "child") {
     return (
       <CreateMemberForm
+        isLoading={isLoading}
         dynasty={dynasty}
         createMember={handleSubmit}
         isOpen={isOpen}

@@ -1,9 +1,8 @@
 import { Auth0Provider } from "@auth0/auth0-react";
 import { ChakraProvider, theme } from "@chakra-ui/react";
-import React, { Suspense } from "react";
+import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./App.css";
-import Loading from "./components/Loading";
 import { User } from "./models/api/User";
 import { Routes } from "./Routes";
 
@@ -15,13 +14,7 @@ const defaultUserContext = {
   user: undefined,
 };
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      suspense: true,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 export const UserContext = React.createContext<UserContext>(defaultUserContext);
 function App() {
@@ -33,13 +26,11 @@ function App() {
         audience={process.env.REACT_APP_AUTH0_AUDIENCE ?? ""}
         redirectUri={window.location.origin}
       >
-        <Suspense fallback={<Loading />}>
-          <QueryClientProvider client={queryClient}>
-            <ChakraProvider theme={theme}>
-              <Routes />
-            </ChakraProvider>
-          </QueryClientProvider>
-        </Suspense>
+        <QueryClientProvider client={queryClient}>
+          <ChakraProvider theme={theme}>
+            <Routes />
+          </ChakraProvider>
+        </QueryClientProvider>
       </Auth0Provider>
     </UserContext.Provider>
   );

@@ -7,8 +7,8 @@ const NavBar = () => {
   return (
     <Flex p={5} justifyContent="space-between">
       <Flex>
-        <Link as={ReachLink} to="/dynasty">
-          My Dynasty
+        <Link as={ReachLink} to="/dynasties">
+          Dynasties
         </Link>
       </Flex>
       <div>
