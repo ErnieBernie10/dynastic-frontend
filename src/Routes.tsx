@@ -1,12 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
-import {
-  BrowserRouter,
-  Redirect,
-  Route,
-  RouteProps,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter, Route, RouteProps, Switch } from "react-router-dom";
 import DynastyContainer from "./pages/Dynasty/Dynasty/DynastyContainer";
 import Home from "./pages/Home/Home";
 import TreeContainer from "./pages/Tree/TreeContainer";
