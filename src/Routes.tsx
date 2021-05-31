@@ -5,6 +5,7 @@ import DynastyContainer from "./pages/Dynasty/Dynasty/DynastyContainer";
 import Home from "./pages/Home/Home";
 import TreeContainer from "./pages/Tree/TreeContainer";
 import ListDynastiesContainer from "./pages/Dynasty/ListDynasties/ListDynastiesContainer";
+import { TreeView } from "./components/TreeView";
 
 export const Routes = () => {
   return (
@@ -26,6 +27,7 @@ export const Routes = () => {
           path="/dynasty/:id"
           component={DynastyContainer}
         />
+        <Route exact path="/dev" component={TreeView} />
       </Switch>
     </BrowserRouter>
   );

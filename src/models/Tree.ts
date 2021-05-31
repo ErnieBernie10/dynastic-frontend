@@ -1,19 +1,16 @@
-export interface Tree {
-  member: Member;
-}
-
-export interface Member {
+export interface Person {
   firstname: string;
-  middlename: string;
+  middlename?: string;
   lastname: string;
-  mother: Member;
-  motherId: string | null;
-  father: Member;
-  fatherId: string | null;
-  relationships: Couple[];
+  motherId?: string;
+  fatherId?: string;
+  id: string;
+  createdAt?: Date;
+  modifiedAt?: Date;
+  relationships: Record<string, Relationship>;
 }
 
-export interface Couple {
-  partner: Member;
-  children: Member[];
+export interface Relationship {
+  partner: Person;
+  children: Person[];
 }

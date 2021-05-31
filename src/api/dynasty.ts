@@ -4,7 +4,7 @@ import axiosApi from "../axios-config";
 import { baseUrl } from "../config";
 import Dynasty from "../models/api/Dynasty";
 import { Person } from "../models/Person";
-import { Tree } from "../models/Tree";
+import { Tree } from "../api/interface/Tree";
 import { GetAccessTokenSilently } from "./interface/auth";
 
 const getDynastyTreeById = async (

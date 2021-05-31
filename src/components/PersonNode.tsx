@@ -1,28 +1,27 @@
-import React from "react";
-import { Person } from "../models/api/Person";
+import React, { forwardRef } from "react";
 import { Box, Image } from "@chakra-ui/react";
+import { Member } from "../api/interface/Tree";
 
 interface Props {
-  person: Person;
+  person: Member;
   className?: string;
-  style?: object;
 }
 
-export const PersonNode: React.FC<Props> = ({
-  person,
-  className,
-  style,
-}: Props) => {
-  const fullName = `${person.firstname}${
-    person.middlename ? person.middlename + " " : " "
-  }${person.lastname}`;
-  return (
-    <div>
+export const PersonNode = forwardRef<HTMLDivElement, Props>(
+  ({ person, className }, ref) => {
+    const fullName = `${person.firstname}${
+      person.middlename ? person.middlename + " " : " "
+    }${person.lastname}`;
+
+    return (
       <Box
+        ref={ref}
+        w={240}
         maxW="sm"
         borderWidth="1px"
         borderRadius="lg"
         overflow="hidden"
+        m={16}
         className={className}
       >
         <Image src="https://via.placeholder.com/240x240" height="240" />
@@ -30,6 +29,6 @@ export const PersonNode: React.FC<Props> = ({
           {fullName}
         </Box>
       </Box>
-    </div>
-  );
-};
+    );
+  }
+);

@@ -10,13 +10,11 @@ import { DrawerForm } from "../../../components/DrawerForm";
 import Dynasty from "../../../models/api/Dynasty";
 import { Person } from "../../../models/Person";
 import { DisclosureProps } from "../../../interface/DisclosureProps";
-import { Tree } from "../../../models/Tree";
 
 export type CreateMemberForm = yup.InferType<typeof schema>;
 
 export interface CreateMemberProps extends DisclosureProps {
   dynasty?: Dynasty;
-  tree?: Tree;
   createMember: (formData: Person) => void;
   isLoading: boolean;
 }
@@ -38,7 +36,6 @@ const CreateMemberForm: React.FC<CreateMemberProps> = ({
   onClose,
   onOpen,
   isOpen,
-  tree,
   isLoading,
 }) => {
   const { register, handleSubmit, formState } = useForm<CreateMemberForm>({
