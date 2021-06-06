@@ -1,14 +1,14 @@
 import { Flex } from "@chakra-ui/layout";
 import React, { forwardRef, useRef } from "react";
-import { Member } from "../api/interface/Tree";
+import { Person } from "../api/interface/FlatTree";
 import { usePos } from "../util/hooks/usePos";
 import { PersonNode } from "./PersonNode";
 import { TreeNode } from "./TreeNode";
 
 interface CoupleNodeProps {
-  person: Member;
-  partner?: Member;
-  couplesChildren: Member[];
+  person: Person;
+  partner?: Person;
+  couplesChildren: Person[];
 }
 export const CoupleNode = forwardRef<HTMLDivElement, CoupleNodeProps>(
   ({ person, partner, couplesChildren }, ref) => {
@@ -23,9 +23,11 @@ export const CoupleNode = forwardRef<HTMLDivElement, CoupleNodeProps>(
           <PersonNode person={person} ref={personRef} />
           {partner && <PersonNode person={partner} ref={partnerRef} />}
         </Flex>
-        {couplesChildren.map((c) => {
-          return <TreeNode person={c} key={c.id} />;
-        })}
+        <Flex justifyContent="center">
+          {couplesChildren.map((c) => {
+            return <TreeNode person={c} key={c.id} />;
+          })}
+        </Flex>
         <svg
           width="100%"
           height="100%"

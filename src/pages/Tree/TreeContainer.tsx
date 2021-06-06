@@ -1,5 +1,5 @@
 import React from "react";
-import { useDynasty } from "../../api/dynasty";
+import { useDynasty, useDynastyFlatTree } from "../../api/dynasty";
 import { useParams } from "react-router-dom";
 import { Button } from "@chakra-ui/button";
 import { AddIcon } from "@chakra-ui/icons";
@@ -14,6 +14,7 @@ const TreeContainer: React.FC<Props> = () => {
   const { id } = useParams<{ id: string }>();
   const { data: dynasty } = useDynasty(id);
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const { data: tree } = useDynastyFlatTree(id);
 
   // const transformedTree = useMemo(() => transformTree(tree), [tree]);
 
@@ -29,7 +30,7 @@ const TreeContainer: React.FC<Props> = () => {
       <Button colorScheme="green" leftIcon={<AddIcon />} onClick={onOpen}>
         Add Member
       </Button>
-      <TreeView />
+      {tree && <TreeView tree={tree} />}
     </Layout>
   );
 };

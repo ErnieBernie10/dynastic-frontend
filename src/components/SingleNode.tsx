@@ -1,9 +1,9 @@
 import React from "react";
-import { Member } from "../api/interface/Tree";
+import { Person } from "../api/interface/FlatTree";
 import { PersonNode } from "./PersonNode";
 
 interface Props {
-  person: Member;
+  person: Person;
 }
 
 export const SingleNode: React.FC<Props> = ({ person }: Props) => {

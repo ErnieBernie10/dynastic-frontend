@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import { Box, Image } from "@chakra-ui/react";
-import { Member } from "../api/interface/Tree";
+import { Person } from "../api/interface/FlatTree";
 
 interface Props {
-  person: Member;
+  person: Person;
   className?: string;
 }
 

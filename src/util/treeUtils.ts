@@ -1,26 +1,12 @@
-import { Member } from "../api/interface/Tree";
+import { Members, Person, Relationship } from "../api/interface/FlatTree";
 
-export interface RawNodeDatum {
-  name: string;
-  attributes?: Record<string, string>;
-  children?: RawNodeDatum[];
-}
-
-export interface TreeNodeDatum extends RawNodeDatum {
-  children?: TreeNodeDatum[];
-  __rd3t: {
-    id: string;
-    depth: number;
-    collapsed: boolean;
-  };
-}
-
-export const transformTree = (members: Member[]) => {
-  return members.map(transformMember);
+export const getChildren = (
+  tree: Members,
+  relationship: Relationship
+): Person[] => {
+  const childrenIds = relationship.children;
+  return Object.values(tree).filter((p) => childrenIds.includes(p.id));
 };
 
-export const transformMember = (member: Member): RawNodeDatum => {
-  return {
-    name: member.firstname + " " + member.lastname,
-  };
-};
+export const getRoots = (members: Members) =>
+  Object.values(members).filter((m) => !m.motherId || !m.fatherId);
