@@ -12,9 +12,9 @@ interface TreeView {
 }
 
 export const TreeView: React.FC<TreeView> = ({ tree }) => {
-  const rootRef = useRef(null);
+const rootRef = useRef(null);
 
-  return (
+return (
     <TreeContext.Provider value={tree.members}>
       <ScrollContainer>
         <Flex justifyContent="space-around">

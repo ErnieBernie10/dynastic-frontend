@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@chakra-ui/button";
 import { AddIcon } from "@chakra-ui/icons";
 import { Flex, useDisclosure } from "@chakra-ui/react";
@@ -6,13 +6,31 @@ import { useDynasties } from "../../../api";
 import { DynastyFeature } from "../../../components/DynastyFeature";
 import { Layout } from "../../../layout/Layout";
 import CreateDynastyDrawer from "../CreateDynasty/CreateDynastyDrawer";
+import { Guid } from "../../../interface/Common";
 
 const ListDynastiesContainer: React.FC = () => {
   const { data, isLoading } = useDynasties();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [editingId, setEditingId] = useState<Guid | undefined>();
+
+  const handleEdit = (id: Guid) => {
+    setEditingId(id);
+    onOpen();
+  };
+
+  const handleClose = () => {
+    setEditingId(undefined);
+    onClose();
+  };
+
   return (
     <Layout>
-      <CreateDynastyDrawer onClose={onClose} onOpen={onOpen} isOpen={isOpen} />
+      <CreateDynastyDrawer
+        onClose={handleClose}
+        id={editingId}
+        onOpen={onOpen}
+        isOpen={isOpen}
+      />
       <Flex justifyContent="start">
         <Button
           leftIcon={<AddIcon />}
@@ -28,7 +46,13 @@ const ListDynastiesContainer: React.FC = () => {
           ? Array(5)
               .fill(undefined)
               .map((_, i) => <DynastyFeature.Skeleton key={i} />)
-          : data?.map((d, i) => <DynastyFeature dynasty={d} key={i} />)}
+          : data?.map((d, i) => (
+              <DynastyFeature
+                dynasty={d}
+                key={i}
+                onEdit={() => handleEdit(d.id)}
+              />
+            ))}
       </Flex>
     </Layout>
   );

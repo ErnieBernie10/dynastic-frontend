@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import axiosApi from "../axios-config";
 import { baseUrl } from "../config";
 import Dynasty from "../models/api/Dynasty";
@@ -81,6 +81,11 @@ export const useCreateMember = () => {
 
 interface CreateDynastyParams {
   name: string;
+  description?: string;
+}
+interface UpdateDynastyParams {
+  id: Guid;
+  body: CreateDynastyParams;
 }
 const createDynasty = async (
   body: CreateDynastyParams,
@@ -95,13 +100,36 @@ const createDynasty = async (
     )
     .then((response) => response);
 };
-export const useCreateDynasty = () => {
+const updateDynasty = async (
+  id: Guid,
+  body: CreateDynastyParams,
+  getToken: GetAccessTokenSilently
+) => {
+  const token = await getToken();
+  return await axiosApi
+    .put<CreateDynastyParams, Dynasty>(
+      baseUrl + "/dynasties/" + id,
+      { ...body },
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    .then((response) => response);
+};
+export const useMutateDynasty = () => {
   const { getAccessTokenSilently } = useAuth0();
+  const queryClient = useQueryClient();
 
-  return useMutation<Dynasty, unknown, CreateDynastyParams>(
-    (params: CreateDynastyParams) =>
-      createDynasty(params, getAccessTokenSilently)
-  );
+  return {
+    create: useMutation<Dynasty, unknown, CreateDynastyParams>(
+      (params: CreateDynastyParams) =>
+        createDynasty(params, getAccessTokenSilently),
+      { onSuccess: () => queryClient.invalidateQueries("dynasties") }
+    ),
+    update: useMutation<Dynasty, unknown, UpdateDynastyParams>(
+      ({ id, body }: UpdateDynastyParams) =>
+        updateDynasty(id, body, getAccessTokenSilently),
+      { onSuccess: () => queryClient.invalidateQueries("dynasties") }
+    ),
+  };
 };
 
 const getDynasties = async (getToken: GetAccessTokenSilently) => {

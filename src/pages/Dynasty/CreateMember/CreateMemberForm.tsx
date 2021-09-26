@@ -58,7 +58,7 @@ const CreateMemberForm: React.FC<CreateMemberProps> = ({
         error={errors.firstname}
         label="Firstname"
         name="firstname"
-        inputRef={register}
+        register={register}
         placeholder="Firstname"
       />
 
@@ -66,14 +66,14 @@ const CreateMemberForm: React.FC<CreateMemberProps> = ({
         error={errors.middlename}
         label="Middlename"
         name="middlename"
-        inputRef={register}
+        register={register}
         placeholder="Middlename"
       />
       <Input
         error={errors.lastname}
         label="Lastname"
         name="lastname"
-        inputRef={register}
+        register={register}
         placeholder="Lastname"
       />
       {dynasty && (
@@ -84,7 +84,7 @@ const CreateMemberForm: React.FC<CreateMemberProps> = ({
               value: p.id,
             }))}
             error={errors.father}
-            inputRef={register}
+            register={register}
             name="fatherId"
             placeholder="Father"
             label="Father"
@@ -95,7 +95,7 @@ const CreateMemberForm: React.FC<CreateMemberProps> = ({
               value: p.id,
             }))}
             error={errors.mother}
-            inputRef={register}
+            register={register}
             name="motherId"
             placeholder="Mother"
             label="Mother"
@@ -108,7 +108,7 @@ const CreateMemberForm: React.FC<CreateMemberProps> = ({
           name="birthdate"
           label="Date of birth"
           placeholder="Date of birth..."
-          inputRef={register}
+          register={register}
         />
       </HStack>
     </DrawerForm>

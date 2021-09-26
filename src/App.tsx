@@ -14,7 +14,13 @@ const defaultUserContext = {
   user: undefined,
 };
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export const UserContext = React.createContext<UserContext>(defaultUserContext);
 function App() {

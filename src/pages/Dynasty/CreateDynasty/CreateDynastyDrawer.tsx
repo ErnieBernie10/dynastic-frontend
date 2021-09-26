@@ -1,18 +1,19 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useQueryClient } from "react-query";
 import * as yup from "yup";
-import { useCreateDynasty } from "../../../api";
+import { useMutateDynasty, useDynasty } from "../../../api";
 import { DrawerForm } from "../../../components/DrawerForm";
 import InputField from "../../../components/Form/InputField";
 import TextareaField from "../../../components/Form/TextArea";
 import withValidation from "../../../components/Form/WithValidation";
+import { Guid } from "../../../interface/Common";
 import { DisclosureProps } from "../../../interface/DisclosureProps";
+import Dynasty from "../../../models/api/Dynasty";
 
 export type CreateDynastySchema = yup.InferType<typeof schema>;
 
-const schema = yup.object().shape({
+const schema = yup.object({
   name: yup.string().required().label("Name"),
   description: yup.string().label("Description"),
 });
@@ -20,29 +21,46 @@ const schema = yup.object().shape({
 const Input = withValidation(InputField);
 const Textarea = withValidation(TextareaField);
 
-type CreateDynastyDrawerProps = DisclosureProps;
+interface CreateDynastyDrawerProps extends DisclosureProps {
+  id?: Guid;
+}
 
 const CreateDynastyDrawer: React.FC<CreateDynastyDrawerProps> = ({
   onOpen,
   onClose,
   isOpen,
+  id,
 }) => {
-  const { register, handleSubmit, formState } = useForm<CreateDynastySchema>({
-    mode: "onBlur",
-    resolver: yupResolver(schema),
-  });
+  const { create, update } = useMutateDynasty();
+  const { data } = useDynasty(id ?? "");
+
+  const { register, handleSubmit, formState, setValue } =
+    useForm<CreateDynastySchema>({
+      mode: "onBlur",
+      resolver: yupResolver(schema),
+    });
   const { errors } = formState;
 
-  const { mutateAsync, isLoading } = useCreateDynasty();
-  const queryClient = useQueryClient();
+  useEffect(() => {
+    if (data) {
+      setValue("name", data.name);
+      setValue("description", data.description);
+    }
+  }, [data, setValue]);
 
   const createDynasty = async (formData: CreateDynastySchema) => {
-    const dynasty = await mutateAsync(formData);
+    let dynasty: Dynasty;
+    if (id) {
+      dynasty = await update.mutateAsync({ id, body: formData });
+    } else {
+      dynasty = await create.mutateAsync(formData);
+    }
     if (dynasty) {
       onClose();
-      queryClient.invalidateQueries("dynasties");
     }
   };
+
+  const isLoading = create.isLoading || update.isLoading;
 
   return (
     <DrawerForm
@@ -50,12 +68,12 @@ const CreateDynastyDrawer: React.FC<CreateDynastyDrawerProps> = ({
       onOpen={onOpen}
       isOpen={isOpen}
       isLoading={isLoading}
-      header="Create new Tree"
+      header={id ? "Edit Tree" : "Create New Tree"}
       onSubmit={handleSubmit(createDynasty)}
     >
       <Input
         error={errors.name}
-        inputRef={register}
+        register={register}
         isRequired
         label="Name"
         name="name"
@@ -63,7 +81,7 @@ const CreateDynastyDrawer: React.FC<CreateDynastyDrawerProps> = ({
       />
       <Textarea
         error={errors.description}
-        inputRef={register}
+        register={register}
         label="Description"
         name="description"
         placeholder="Description of the tree..."

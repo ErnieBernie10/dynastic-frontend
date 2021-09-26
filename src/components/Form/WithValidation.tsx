@@ -3,19 +3,21 @@ import React from "react";
 import { FieldError } from "react-hook-form";
 
 export interface InputProps {
-  error?: FieldError;
   label: string;
+  name: string;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  register: Function;
+  error?: FieldError;
 }
 
 export interface InputFieldProps {
-  inputRef?: any;
   placeholder?: string;
 }
 
 const withValidation = <T extends InputFieldProps>(
   Component: React.FC<T>
 ): React.FC<T & InputProps> => {
-  return ({ error, label, ...rest }) => {
+  return ({ label, register, name, error, ...rest }) => {
     return (
       <FormControl
         minH={105}
@@ -23,8 +25,8 @@ const withValidation = <T extends InputFieldProps>(
         errortext={error?.message}
       >
         <FormLabel>{label}</FormLabel>
-        <Component {...(rest as T)} />
-        <FormErrorMessage>{error?.message}</FormErrorMessage>
+        <Component {...register(name)} {...(rest as T)} />
+        {error && <FormErrorMessage>{error?.message}</FormErrorMessage>}
       </FormControl>
     );
   };

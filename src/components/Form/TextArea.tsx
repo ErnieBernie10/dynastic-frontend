@@ -1,27 +1,23 @@
-import { Textarea, TextareaProps } from "@chakra-ui/react";
+import { forwardRef, Textarea, TextareaProps } from "@chakra-ui/react";
 import React from "react";
 
 interface TextareaFieldProps extends TextareaProps {
   name: string;
   placeholder: string;
-  inputRef: any;
 }
 
-const TextareaField: React.FC<TextareaFieldProps> = ({
-  name,
-  placeholder,
-  inputRef,
-  ...rest
-}) => {
-  return (
-    <Textarea
-      type="text"
-      name={name}
-      placeholder={placeholder}
-      ref={inputRef}
-      {...rest}
-    />
-  );
-};
+const TextareaField: React.FC<TextareaFieldProps> = forwardRef(
+  ({ name, placeholder, ...rest }, ref) => {
+    return (
+      <Textarea
+        ref={ref}
+        type="text"
+        name={name}
+        placeholder={placeholder}
+        {...rest}
+      />
+    );
+  }
+);
 
 export default TextareaField;

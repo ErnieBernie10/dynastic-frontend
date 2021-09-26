@@ -11,9 +11,10 @@ import { CreateMemberProps } from "./CreateMemberForm";
 const Input = withValidation(InputField);
 const Select = withValidation(SelectField);
 
-const schema = yup.object().shape({
+const schema = yup.object({
   firstname: yup.string().required().label("Firstname"),
   lastname: yup.string().required().label("Lastname"),
+  partner: yup.string(),
 });
 
 export type CreateMemberForm = yup.InferType<typeof schema>;
@@ -36,14 +37,14 @@ const CreateRelationshipForm: React.FC<CreateMemberProps> = ({
           error={errors.firstname}
           label="Firstname"
           name="firstname"
-          inputRef={register}
+          register={register}
           placeholder="Firstname"
         />
         <Input
           error={errors.lastname}
           label="Lastname"
           name="lastname"
-          inputRef={register}
+          register={register}
           placeholder="Lastname"
         />
       </HStack>
@@ -54,7 +55,7 @@ const CreateRelationshipForm: React.FC<CreateMemberProps> = ({
             value: p.id,
           }))}
           error={errors.partner}
-          inputRef={register}
+          register={register}
           name="partner"
           placeholder="Partner"
           label="Partner"
