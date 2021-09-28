@@ -37,7 +37,7 @@ export const DrawerForm: React.FC<DrawerFormProps> = ({
             <DrawerHeader borderBottomWidth="1px">{header}</DrawerHeader>
 
             <DrawerBody>
-              <Box md={12}>{children}</Box>
+              <Box mx={12}>{children}</Box>
             </DrawerBody>
 
             <DrawerFooter borderTopWidth="1px">

@@ -5,6 +5,7 @@ import { DisclosureProps } from "../../../interface/DisclosureProps";
 import Dynasty from "../../../models/api/Dynasty";
 import { Person } from "../../../models/Person";
 import CreateMemberForm from "./CreateMemberForm";
+import CreateRelationshipForm from "./CreateRelationshipForm";
 
 interface CreateMemberContainerProps extends DisclosureProps {
   type: "child" | "relationship";
@@ -21,7 +22,7 @@ const CreateMemberContainer: React.FC<CreateMemberContainerProps> = ({
   const { id } = useParams<{ id: string }>();
   const { mutateAsync, isLoading } = useCreateMember();
 
-  const handleSubmit = async (formData: Person) => {
+  const handleSubmit = async (formData: Partial<Person>) => {
     const result = await mutateAsync({ id, person: formData });
     if (result) {
       onClose();
@@ -40,7 +41,16 @@ const CreateMemberContainer: React.FC<CreateMemberContainerProps> = ({
       />
     );
   } else {
-    return <div>Not implemented</div>;
+    return (
+      <CreateRelationshipForm
+        isLoading={isLoading}
+        dynasty={dynasty}
+        createMember={handleSubmit}
+        isOpen={isOpen}
+        onClose={onClose}
+        onOpen={onOpen}
+      />
+    );
   }
 };
 

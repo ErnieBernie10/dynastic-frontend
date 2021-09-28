@@ -19,11 +19,7 @@ const withValidation = <T extends InputFieldProps>(
 ): React.FC<T & InputProps> => {
   return ({ label, register, name, error, ...rest }) => {
     return (
-      <FormControl
-        minH={105}
-        isInvalid={!!error?.message}
-        errortext={error?.message}
-      >
+      <FormControl minH={105} isInvalid={!!error?.message}>
         <FormLabel>{label}</FormLabel>
         <Component {...register(name)} {...(rest as T)} />
         {error && <FormErrorMessage>{error?.message}</FormErrorMessage>}

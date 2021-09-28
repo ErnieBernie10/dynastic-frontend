@@ -15,7 +15,7 @@ export type CreateMemberForm = yup.InferType<typeof schema>;
 
 export interface CreateMemberProps extends DisclosureProps {
   dynasty?: Dynasty;
-  createMember: (formData: Person) => void;
+  createMember: (formData: Partial<Person>) => void;
   isLoading: boolean;
 }
 

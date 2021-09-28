@@ -7,7 +7,7 @@ const Home = () => {
 
   if (isLoading) {
     return <></>;
-  } else if (isAuthenticated) {
+  } else if (isAuthenticated || process.env.NODE_ENV === "development") {
     return <Redirect to="/dynasties" />;
   } else {
     return <Redirect to="/login" />;

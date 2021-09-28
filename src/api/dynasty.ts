@@ -50,7 +50,7 @@ export const useDynastyTree = (id: Guid) => {
 
 interface CreateMemberParams {
   id: Guid;
-  person: Person;
+  person: Partial<Person>;
 }
 const createMember = async (
   { id, person }: CreateMemberParams,

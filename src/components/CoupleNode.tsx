@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/layout";
+import { Flex } from "@chakra-ui/react";
 import React, { forwardRef, useRef } from "react";
 import { Person } from "../api/interface/FlatTree";
 import { usePos } from "../util/hooks/usePos";

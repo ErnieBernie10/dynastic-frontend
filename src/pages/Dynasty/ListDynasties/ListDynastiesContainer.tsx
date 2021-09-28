@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Button } from "@chakra-ui/button";
 import { AddIcon } from "@chakra-ui/icons";
-import { Flex, useDisclosure } from "@chakra-ui/react";
+import { Flex, useDisclosure, Button } from "@chakra-ui/react";
 import { useDynasties } from "../../../api";
 import { DynastyFeature } from "../../../components/DynastyFeature";
 import { Layout } from "../../../layout/Layout";
@@ -16,6 +15,10 @@ const ListDynastiesContainer: React.FC = () => {
   const handleEdit = (id: Guid) => {
     setEditingId(id);
     onOpen();
+  };
+
+  const handleDelete = (id: Guid) => {
+    console.log("delete", id);
   };
 
   const handleClose = () => {
@@ -51,6 +54,7 @@ const ListDynastiesContainer: React.FC = () => {
                 dynasty={d}
                 key={i}
                 onEdit={() => handleEdit(d.id)}
+                onDelete={() => handleDelete(d.id)}
               />
             ))}
       </Flex>

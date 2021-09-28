@@ -1,13 +1,13 @@
 import React from "react";
 import { useDynasty, useDynastyFlatTree } from "../../api/dynasty";
 import { useParams } from "react-router-dom";
-import { Button } from "@chakra-ui/button";
 import { AddIcon } from "@chakra-ui/icons";
 import CreateMemberContainer from "../Dynasty/CreateMember/CreateMemberContainer";
-import { useDisclosure } from "@chakra-ui/react";
+import { useDisclosure, Button } from "@chakra-ui/react";
 import { Layout } from "../../layout/Layout";
 import { TreeView } from "../../components/TreeView";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
 const TreeContainer: React.FC<Props> = () => {
