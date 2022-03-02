@@ -7,4 +7,14 @@ const axiosApi = axios.create({
   baseURL,
 });
 
+axiosApi.interceptors.request.use((config) => {
+  // TODO add bearer token from auth0
+  const token = "";
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
 export default axiosApi;

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import "./App.css";
 import { User } from "./models/api/User";
 import { Routes } from "./Routes";
+import { worker } from "./mocks/browser";
 
 interface UserContext {
   user?: User;
@@ -21,6 +22,10 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+if (process.env.NODE_ENV === "development") {
+  worker.start();
+}
 
 export const UserContext = React.createContext<UserContext>(defaultUserContext);
 function App() {

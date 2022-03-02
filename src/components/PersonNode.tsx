@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Box, Image } from "@chakra-ui/react";
-import { Person } from "../api/interface/FlatTree";
+import { Person } from "../models/api/FlatTree";
 
 interface Props {
   person: Person;

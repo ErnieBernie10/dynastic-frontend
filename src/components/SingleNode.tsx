@@ -1,5 +1,5 @@
 import React from "react";
-import { Person } from "../api/interface/FlatTree";
+import { Person } from "../models/api/FlatTree";
 import { PersonNode } from "./PersonNode";
 
 interface Props {
