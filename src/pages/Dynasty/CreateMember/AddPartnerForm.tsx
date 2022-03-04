@@ -6,7 +6,8 @@ import withValidation from "../../../components/Form/WithValidation";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { CreateMemberProps } from "./CreateMemberForm";
+import { CreateMemberProps } from "./AddChildForm";
+import { DrawerForm } from "../../../components/DrawerForm";
 
 const Input = withValidation(InputField);
 const Select = withValidation(SelectField);
@@ -14,7 +15,7 @@ const Select = withValidation(SelectField);
 const schema = yup.object({
   firstname: yup.string().required().label("Firstname"),
   lastname: yup.string().required().label("Lastname"),
-  partner: yup.string(),
+  middlename: yup.string().label("Middlename"),
 });
 
 export type CreateMemberForm = yup.InferType<typeof schema>;
@@ -22,6 +23,10 @@ export type CreateMemberForm = yup.InferType<typeof schema>;
 const CreateRelationshipForm: React.FC<CreateMemberProps> = ({
   createMember,
   dynasty,
+  onClose,
+  onOpen,
+  isOpen,
+  isLoading,
 }) => {
   const { register, handleSubmit, formState } = useForm<CreateMemberForm>({
     mode: "onBlur",
@@ -31,37 +36,47 @@ const CreateRelationshipForm: React.FC<CreateMemberProps> = ({
   const { errors } = formState;
 
   return (
-    <form onSubmit={handleSubmit(createMember)}>
+    <DrawerForm
+      isOpen={isOpen}
+      onOpen={onOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit(createMember)}
+      isLoading={isLoading}
+      header="Add Member"
+      size="md"
+    >
+      <Input
+        error={errors.firstname}
+        label="Firstname"
+        name="firstname"
+        register={register}
+        placeholder="Firstname"
+      />
+
+      <Input
+        error={errors.middlename}
+        label="Middlename"
+        name="middlename"
+        register={register}
+        placeholder="Middlename"
+      />
+      <Input
+        error={errors.lastname}
+        label="Lastname"
+        name="lastname"
+        register={register}
+        placeholder="Lastname"
+      />
       <HStack>
         <Input
-          error={errors.firstname}
-          label="Firstname"
-          name="firstname"
+          type="date"
+          name="birthdate"
+          label="Date of birth"
+          placeholder="Date of birth..."
           register={register}
-          placeholder="Firstname"
-        />
-        <Input
-          error={errors.lastname}
-          label="Lastname"
-          name="lastname"
-          register={register}
-          placeholder="Lastname"
         />
       </HStack>
-      {dynasty && (
-        <Select
-          options={dynasty.members.map((p) => ({
-            name: p.firstname + " " + p.lastname,
-            value: p.id,
-          }))}
-          error={errors.partner}
-          register={register}
-          name="partner"
-          placeholder="Partner"
-          label="Partner"
-        />
-      )}
-    </form>
+    </DrawerForm>
   );
 };
 

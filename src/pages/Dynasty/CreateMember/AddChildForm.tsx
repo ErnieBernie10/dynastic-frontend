@@ -30,7 +30,7 @@ const schema = yup.object().shape({
   mother: yup.string().label("Mother"),
 });
 
-const CreateMemberForm: React.FC<CreateMemberProps> = ({
+const AddChildForm: React.FC<CreateMemberProps> = ({
   createMember,
   dynasty,
   onClose,
@@ -115,4 +115,4 @@ const CreateMemberForm: React.FC<CreateMemberProps> = ({
   );
 };
 
-export default CreateMemberForm;
+export default AddChildForm;

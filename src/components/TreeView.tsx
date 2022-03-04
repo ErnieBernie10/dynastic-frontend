@@ -1,28 +1,57 @@
-import React from "react";
-import ReactFlow from "react-flow-renderer";
+import { AddIcon } from "@chakra-ui/icons";
+import { Button } from "@chakra-ui/react";
+import { isEmpty } from "ramda";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import ReactFlow, { Elements } from "react-flow-renderer";
+import { TreeContext } from "../context/TreeContext";
 import { Tree } from "../models/api/FlatTree";
-
-export const TreeContext = React.createContext<Tree>({ members: [] });
+import { CustomNode } from "./CustomNode/CustomNode";
+import { InitialNode } from "./CustomNode/InitialNode";
+import { IntersectionNode } from "./CustomNode/IntersectionNode";
+import { Node } from "react-flow-renderer";
 
 interface TreeView {
-  tree: Tree;
+  tree?: Elements;
 }
 
 export const TreeView: React.FC<TreeView> = ({ tree }) => {
+  const { elements, setElements } = useContext(TreeContext);
+
+  console.log(elements);
+
+  const handleNodeDragStop = (event: React.MouseEvent, node: Node) => {
+    setElements([...elements.filter((n) => n.id !== node.id), node]);
+  };
+
+  useEffect(() => {
+    if (isEmpty(elements)) {
+      setElements([
+        {
+          id: "initial",
+          position: {
+            x: 500,
+            y: 0,
+          },
+          type: "initial",
+        },
+      ]);
+    }
+  }, [elements]);
+
   return (
-    <TreeContext.Provider value={tree}>
-      {/* <ScrollContainer> */}
-      {/* <Flex justifyContent="space-around">
-          {Object.values(getRoots(tree.members)).map((m) => {
-            return <TreeNode person={m} key={m.id} ref={rootRef} />;
-          })}
-        </Flex> */}
-      {/* <ReactFlow
-        elements={treeElements}
+    <>
+      <ReactFlow
+        elements={elements}
         onLoad={(instance) => instance.fitView()}
         style={{ height: 1000 }}
-      /> */}
-      {/* </ScrollContainer> */}
-    </TreeContext.Provider>
+        nodeTypes={{
+          multi: CustomNode,
+          intersection: IntersectionNode,
+          initial: InitialNode,
+        }}
+        onNodeDragStop={handleNodeDragStop}
+        snapToGrid
+      />
+    </>
   );
 };

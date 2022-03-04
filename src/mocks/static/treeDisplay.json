@@ -1,0 +1,161 @@
+[
+  {
+    "id": "1",
+    "position": {
+      "x": 0,
+      "y": 0
+    },
+    "data": {
+      "label": "Philip de Bourgogne",
+      "relationships": [
+        {
+          "partner": "2",
+          "children": ["3", "4"]
+        }
+      ]
+    },
+    "type": "multi"
+  },
+  {
+    "id": "2",
+    "position": {
+      "x": 200,
+      "y": 0
+    },
+    "data": {
+      "label": "Margaret de Dampierre",
+      "relationships": [
+        {
+          "partner": "1",
+          "children": ["3", "4"]
+        }
+      ]
+    },
+    "type": "multi"
+  },
+  {
+    "id": "e1-2",
+    "source": "1",
+    "target": "2",
+    "sourceHandle": "sr",
+    "targetHandle": "tl",
+    "type": "step"
+  },
+  {
+    "id": "i1-2",
+    "position": {
+      "x": 200,
+      "y": 100
+    },
+    "type": "intersection"
+  },
+  {
+    "id": "e1-i1-2",
+    "source": "1",
+    "target": "i1-2",
+    "sourceHandle": "sr",
+    "targetHandle": "tt",
+    "type": "step"
+  },
+  {
+    "id": "e2-i1-2",
+    "source": "2",
+    "target": "i1-2",
+    "sourceHandle": "sl",
+    "targetHandle": "tt",
+    "type": "step"
+  },
+  {
+    "id": "3",
+    "position": {
+      "x": -100,
+      "y": 200
+    },
+    "data": {
+      "label": "John de Bourgogne",
+      "relationships": [
+        {
+          "partner": "5",
+          "children": ["6"]
+        }
+      ]
+    },
+    "type": "multi"
+  },
+  {
+    "id": "5",
+    "position": {
+      "x": 100,
+      "y": 200
+    },
+    "data": {
+      "label": "Margaret of Bavaria",
+      "relationships": [
+        {
+          "partner": "3",
+          "children": ["6"]
+        }
+      ]
+    },
+    "type": "multi"
+  },
+  {
+    "id": "e3-5",
+    "source": "3",
+    "target": "5",
+    "sourceHandle": "sr",
+    "targetHandle": "tl",
+    "type": "step"
+  },
+  {
+    "id": "i3-5",
+    "position": {
+      "x": 100,
+      "y": 300
+    },
+    "type": "intersection"
+  },
+  {
+    "id": "e3-i3-5",
+    "source": "3",
+    "target": "i3-5",
+    "sourceHandle": "sr",
+    "targetHandle": "tt",
+    "type": "step"
+  },
+  {
+    "id": "e5-i3-5",
+    "source": "5",
+    "target": "i3-5",
+    "sourceHandle": "sl",
+    "targetHandle": "tt",
+    "type": "step"
+  },
+  {
+    "id": "ei1-2-3",
+    "source": "i1-2",
+    "target": "3",
+    "sourceHandle": "sb",
+    "targetHandle": "tt",
+    "type": "step"
+  },
+  {
+    "id": "4",
+    "position": {
+      "x": 300,
+      "y": 200
+    },
+    "data": {
+      "label": "Charles de Bourgogne"
+    },
+    "type": "multi"
+  },
+  {
+    "id": "ei1-2-4",
+    "source": "i1-2",
+    "target": "4",
+    "sourceHandle": "sb",
+    "targetHandle": "tt",
+    "type": "step"
+  }
+]

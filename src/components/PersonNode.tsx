@@ -21,7 +21,6 @@ export const PersonNode = forwardRef<HTMLDivElement, Props>(
         borderWidth="1px"
         borderRadius="lg"
         overflow="hidden"
-        m={16}
         className={className}
       >
         <Image src="https://via.placeholder.com/240x240" height="240" />
